@@ -1,0 +1,545 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none !important;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: Akira;
+    src: url(Akira.otf);
+}
+@font-face {
+    font-family: Gotham;
+    src: url(Gotham-Book.otf);
+}
+
+/* ------------------------------------------------------------------------------- ERIK ------------------------------------------------------------------------------ */
+  
+.stack {
+    
+    display: grid;
+    grid-template-columns: 1fr;
+
+  }
+  
+  .stack span {
+    margin-top: 300px;
+    font-family: Akira;
+    font-size: 4rem;
+    color: rgb(41, 41, 41);;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    --stack-height: calc(100% / var(--stacks) - 1px);
+    --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+    --clip-top: calc(var(--stack-height) * var(--index));
+    --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+    clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+    animation: stack 340ms cubic-bezier(.46,.29,0,1.4) 1 backwards calc(var(--index) * 120ms), glitch 2s ease infinite 2s alternate-reverse;
+  }
+  
+  .stack span:nth-child(odd) { --glitch-translate: 8px; }
+  .stack span:nth-child(even) { --glitch-translate: -8px; }
+
+  @keyframes stack {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%);
+      text-shadow: -2px 3px 0 rgb(252, 252, 252), 2px -3px 0 greenyellow;
+    };
+    60% {
+      opacity: 0.5;
+      transform: translateX(50%);
+    }
+    80% {
+      transform: none;
+      opacity: 1;
+      text-shadow: 2px -3px 0 rgb(255, 255, 255), -2px 3px 0 greenyellow;
+    }
+    100% {
+      text-shadow: none;
+    }
+  }
+  
+  @keyframes glitch {
+    0% {
+      text-shadow: -2px 3px 0 rgb(255, 255, 255), 2px -3px 0 greenyellow;
+      transform: translate(var(--glitch-translate));
+    }
+    2% {
+      text-shadow: 2px -3px 0 rgb(255, 255, 255), -2px 3px 0 greenyellow;
+    }
+    4%, 100% {  text-shadow: none; transform: none; }
+  }
+
+/* ------------------------------------------------------------------------- RESPONSIVE HEADER ----------------------------------------------------------------------- */
+
+nav{
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100px;
+    width: 100%;
+    position: fixed !important;
+}
+
+
+.logo{
+    float: left;
+    width: 250px;
+    margin-top: 15px;
+    transition: transform 0.5s;
+}
+
+.logo:hover{
+    animation-duration: 0.3s;
+    transform: scale(1.05);
+}
+
+nav ul{
+    float: right;
+    margin-right: 50px;
+    font-family: Akira;
+}
+
+nav ul li{
+    display: inline-block;
+    line-height: 100px;
+    margin: 0 15px;
+}
+
+nav ul li a{
+    color: white;
+    font-size: 14px;
+    padding: 7px 13px;
+    border-radius: 3px;
+}
+
+a.active,a:hover{
+    color: rgb(148, 148, 148);
+    background: #2e2e2e;
+    transition: .5s;
+    
+}
+.checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check{
+    display: none;
+}
+
+@media (max-width: 952px){
+    .logo{
+        width: 280px;
+        padding-left: 50px;
+    }
+    nav ul li a{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 858px){
+    .checkbtn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: black;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    nav ul li a {
+        font-size: 20px;
+    }
+    a:hover,a.active{
+        background: none;
+        color:rgb(97, 97, 97);
+    }
+    #check:checked ~ ul{
+        left: 0;
+    }
+}
+
+/* --------------------------------------------------------------------------------- INICIO ------------------------------------------------------------------------ */
+
+.inicio{
+    background-color: black;
+    height: calc(130vh - 150px);
+}
+
+
+.titulo label{
+    margin-top: 300px;
+    font-size: 4rem;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: Akira;
+}
+
+
+#colacios{
+    margin-top: -30px;
+    text-align: center;
+    color: rgb(41, 41, 41);
+    cursor: pointer;
+    transition: 0.5s;
+    font-size: 4rem;
+    font-family: Akira;
+}
+
+#colacios:hover{
+    color: white;
+    text-shadow: 0 0 10px rgb(3, 238, 81),
+                 0 0 20px rgb(3, 238, 81),
+                 0 0 40px rgb(3, 238, 81),
+                 0 0 80px rgb(3, 238, 81),
+                 0 0 120px rgb(3, 238, 81),
+                 0 0 160px rgb(3, 238, 81);
+}
+
+
+/* --------------------------------------------------------------------- 1. PRESENTACION ------------------------------------------------------------------------------ */
+
+.presentacion{
+    background: url(imgs/abstract.jpg) no-repeat;
+    background-size: cover;
+    height: calc(155vh - 200px);
+    font-family: Akira;
+    color: white;
+}
+
+.presentacion label{
+    font-family: Akira;
+    color: white;
+}
+
+.welcometomyspace{
+    float: right;
+    font-size: 4rem;
+    margin-right: 10%;
+    margin-top: 70px;
+}
+
+
+.welcome{
+    font-size: 5rem;
+    position: relative;
+    margin-bottom: -50px;
+}
+
+.tomy{
+    margin-top: 40px;
+    font-size: 1.5rem;
+}
+#my{
+    position: relative;
+    margin-top: -50px;
+}
+
+.tomyspace{
+    float: right;
+    display: inline-flex;
+    font-size: 5rem;
+}
+
+.space{
+    font-size: 6rem;
+    margin-left: 20px;
+    
+}
+
+.textopresentacion label{
+    margin-top: 10%;
+    padding-right: 40%;
+    font-size: 20px;
+    font-family: Gotham;   
+}
+
+.discovermore label{
+    float: right;
+    font-size: 2rem;
+    margin-top: 150px;
+    margin-right: 150px;
+}
+
+
+/* --------------------------------------------------------------------- 2. COLORS ARE KEY ---------------------------------------------------------------------------- */
+
+.colorsarekey{
+
+    background: url(imgs/fondowaves.jpg) no-repeat;
+    background-size: cover;
+    height: calc(140vh - 200px);
+    font-family: Akira;
+    font-size: 4rem;
+    color: white;
+}
+
+.titulocolors{
+    padding-top: 80px;
+    margin-left: 15%;
+}
+
+.colorsare{
+    margin-bottom: -25px;
+}
+
+.thekey{
+    margin-left: 14%;
+}
+
+.textocolorsarekey label{
+    margin-top: 28%;
+    color: black;
+    padding-right: 30%;
+    font-size: 24px;
+    font-family: Gotham;   
+}
+
+
+/* --------------------------------------------------------------------- 3. MODERN SMART ------------------------------------------------------------------------------ */
+
+.modernsmart{
+
+    padding-top: 250px;
+    background-color: white;
+    height: calc(170vh - 200px);
+    font-family: Akira;
+    font-size: 11rem;
+    color: rgb(25, 68, 255);
+    overflow: hidden;
+}
+
+
+.textomodernsmart label{
+    float: right;
+    margin-top: 5%;
+    color: black;
+    padding-left: 40%;
+    font-size: 24px;
+    font-family: Gotham; 
+}
+
+.modern{
+    float: right;
+}
+
+
+/* --------------------------------------------------------------------- 4. SIMPLE AND CLEAN -------------------------------------------------------------------------- */
+
+
+.simpleandclean{
+    padding-top: 100px;
+    height: calc(150vh - 170px);
+    background-image: url(imgs/bluesmoke.jpg);
+
+}
+
+.simpleandclean h1{
+    font-size: 80px;
+    font-weight: 700;
+    color: rgb(7, 255, 7);  
+    margin-bottom: 100px;
+}
+
+
+.recuadro{
+    background-color: white;
+    box-shadow: 1px 5px 5px 7px rgba(0, 0, 0, 0.137);
+    border-radius: 15px;
+    width: 250px;
+    height: 380px;
+    font-family: Gotham; 
+    transition: transform 0.5s;
+    
+}
+
+.recuadro:hover{
+    transform: translateY(-35px);
+}
+
+
+.recuadro img{
+    width: 60px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+.recuadro label{
+    padding: 30px;
+}
+
+
+/* --------------------------------------------------------------------- 5. LATEST PROJECTS --------------------------------------------------------------------------- */
+
+/* -------------------------------------- primera tira----------------------------------------------------- */
+.latestprojects{
+
+    height: calc(150vh - 170px);
+    background-color: black;
+    
+}
+
+.marquee{
+    width: 100%;
+    height: 70px;
+    color: white;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.marquee div{
+    font-size: 3rem;
+    font-family: Akira;
+    animation: animate 45s linear infinite;
+    padding-left: 90%;
+    display: inline-block;
+}
+
+@keyframes animate{
+    100%{
+        transform: translate(-100%, 0);
+    }
+}
+
+/* -------------------------------------- segunda tira ----------------------------------------------------- */
+
+.marquee2{
+    width: 100%;
+    height: 70px;
+    color: white;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.marquee2 div{
+    
+    font-size: 3rem;
+    font-family: Akira;
+    animation: animate2 45s linear infinite;
+    display: inline-block;
+}
+
+@keyframes animate2{
+    0%{
+        transform: translate(-100%, 0);
+    }
+}
+
+
+
+
+/* --------------------------------------------------------------------- 6. TECHNOLOGIES ------------------------------------------------------------------------------ */
+
+
+
+.technologies{
+
+    padding-top: 200px;
+    height: calc(180vh - 170px);
+    background-color: black;
+    font-family: Akira;
+    color: white;
+    font-size: 4rem;
+    
+}
+
+.technologies label{
+    font-family: Gotham;
+    font-size: 16px;
+    color: white;
+}
+
+.tecnologia{
+    margin: 20px;
+    padding: 50px;
+}
+
+.technologies img{
+    width: 100px;
+    transition: transform 0.5s;
+}
+
+.technologies img:hover{
+    transform: translateY(-15px);
+}
+
+
+
+/* --------------------------------------------------------------------- 7. CONTACT ------------------------------------------------------------------------------ */
+
+
+.contact{
+    padding-top: 150px;
+    height: calc(150vh - 170px);
+    background-image: url(galaxy.gif);
+    font-family: Akira;
+    color: white;
+    font-size: 4rem;
+    
+}
+.contactinfo{
+    padding-left: 15    0px;
+}
+
+.contact #areyouready{
+    margin-top: 100px;
+    margin-left: 100px;
+    font-size: 2rem;
+}
+.contact #takeoff{
+    font-size: 3rem;
+    margin-left: 100px;
+    color: rgb(255, 230, 0);
+}
+
+.formulario{
+    margin-top: 100px;
+    font-family: Gotham;
+    font-size: 18px;
+}
+
+input{
+    border-radius: 10px;
+    width: 250px;
+    padding: 10px;
+    border-style: none;
+    background-color: #5c5c5c;
+}
+
+textarea{
+    background-color: #5c5c5c;
+    border-radius: 10px;
+}
+
+#botonEnviar{
+    background-color: greenyellow;
+    transition: 0.5s;
+}
+
+#botonEnviar:hover{
+    background-color: white;
+    
+}
